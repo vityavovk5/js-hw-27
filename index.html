@@ -21,7 +21,12 @@
         <button id="buttonList" onclick="listDone()">список что уже есть</button>
         <button  onclick="sort()">отсортировать список</button> 
         <input type="text" id="newPparameter">
-        <button  onclick="addSome()">отсортировать список</button> 
+        <select id="yesNo">
+            <option value="">купил? не?</option>
+            <option value="уже в корзине">уже купил</option>
+            <option value="нужно купить">нужно купить</option>
+        </select>
+        <button  onclick="addSome()">добавить</button> 
         <p id="list"></p>
     
     </section>

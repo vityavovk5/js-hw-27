@@ -10,32 +10,57 @@ var list = [
 ]
 
 function checkif() {
-    var chbox;
-    chbox=document.getElementsByClassName('checkbox');
-    
+    let listHtml = document.getElementById("list");
+
+    for (let = i = 0;
+    i < list.length;
+    i++
+)
+    {
+        chbox = document.getElementById(`${i}`);
+        var chbox;
         if (chbox.checked) {
-            list[this] = "ddd";
-            console.log(list[this]);
+            list[i][1] = "уже в корзине";
         }
         else {
-            list[this] = "dddrrr";
-            console.log(list[this]);
+            list[i][1] = "нужно купить";
         }
+    }
+
+    cleanHtml()
+    for (let = i = 0;
+    i < list.length;
+    i++
+)
+    {
+        if (list[i][1] == "нужно купить") {
+            listHtml.insertAdjacentHTML('beforeend', `<input type="checkbox" onchange="checkif(this)" class="checkbox" id="${i}"><label for="${i}">${list[i][0]} : <span class="chea">${list[i][1]}</span></label><br>`);
+        } else {
+            listHtml.insertAdjacentHTML('beforeend', `<input type="checkbox" checked onchange="checkif(this)" class="checkbox" id="${i}"><label for="${i}">${list[i][0]} : ${list[i][1]}</label><br>`);
+        }
+
+    }
+
 }
+
 
 function listDone() {
     let listHtml = document.getElementById("list");
     cleanHtml()
-    for (let = i = 0; i<list.length; i++) {
+    for (let = i = 0;
+    i < list.length;
+    i++
+)
+    {
         if (list[i][1] == "нужно купить") {
-            listHtml.insertAdjacentHTML('beforeend', `<input type="checkbox" onchange="checkif()" class="checkbox" id="${i}"><label for="${i}">${list[i][0]} : <span class="chea">${list[i][1]}</span></label><br>`);
+            listHtml.insertAdjacentHTML('beforeend', `<input type="checkbox" onchange="checkif(this)" class="checkbox" id="${i}"><label for="${i}">${list[i][0]} : <span class="chea">${list[i][1]}</span></label><br>`);
         } else {
-            listHtml.insertAdjacentHTML('beforeend', `<input type="checkbox" checked onchange="checkif()" class="checkbox" id="${i}"><label for="${i}">${list[i][0]} : ${list[i][1]}</label><br>`);
+            listHtml.insertAdjacentHTML('beforeend', `<input type="checkbox" checked onchange="checkif(this)" class="checkbox" id="${i}"><label for="${i}">${list[i][0]} : ${list[i][1]}</label><br>`);
         }
 
     }
 }
- 
+
 function cleanHtml() {
     var element = document.getElementById("list");
     while (element.firstChild) {
@@ -46,31 +71,56 @@ function cleanHtml() {
 function sort() {
     let listHtml = document.getElementById("list");
     cleanHtml()
-    for (let = i = 0; i<list.length; i++) {
+    for (let = i = 0;
+    i < list.length;
+    i++
+)
+    {
         if (list[i][1] == "нужно купить") {
-            listHtml.insertAdjacentHTML('beforeend', `<p>${list[i][0]} : ${list[i][1]}</p>`);
+            listHtml.insertAdjacentHTML('beforeend', `<input type="checkbox" onchange="checkif(this)" class="checkbox" id="${i}"><label for="${i}">${list[i][0]} : <span class="chea">${list[i][1]}</span></label><br>`);
         }
     }
-    for (let = i = 0; i<list.length; i++) {
+    for (let = i = 0;
+    i < list.length;
+    i++
+)
+    {
         if (list[i][1] == "уже в корзине") {
-            listHtml.insertAdjacentHTML('beforeend', `<p>${list[i][0]} : ${list[i][1]}</p>`);
+            listHtml.insertAdjacentHTML('beforeend', `<input type="checkbox" checked onchange="checkif(this)" class="checkbox" id="${i}"><label for="${i}">${list[i][0]} : ${list[i][1]}</label><br>`);
         }
     }
 }
 
 function addSome() {
-    // cleanHtml()
     let listHtml = document.getElementById("list");
-    params = document.getElementsByTagName( "input" )[0].value;
-    console.log(params);
-    // list.push('params');
-    list = params;
-    
-     
-    for (var key in list) {
-        listHtml.insertAdjacentHTML('beforeend', `<p>${key} : ${list[key]}</p>`);
+    var add = document.getElementById("newPparameter").value;
+    var selectYesNo = document.getElementById("yesNo").value;
+    if (add != "") {
+        if (selectYesNo != "") {
+            list.push([add, selectYesNo]);
+            console.log(list);
+            cleanHtml()
+            for (let = i = 0;
+            i < list.length;
+            i++
+        )
+            {
+                if (list[i][1] == "нужно купить") {
+                    listHtml.insertAdjacentHTML('beforeend', `<input type="checkbox" onchange="checkif(this)" class="checkbox" id="${i}"><label for="${i}">${list[i][0]} : <span class="chea">${list[i][1]}</span></label><br>`);
+                } else {
+                    listHtml.insertAdjacentHTML('beforeend', `<input type="checkbox" checked onchange="checkif(this)" class="checkbox" id="${i}"><label for="${i}">${list[i][0]} : ${list[i][1]}</label><br>`);
+                }
+
+            }
+        } else {
+            cleanHtml()
+            listHtml.insertAdjacentHTML('beforeend', `там выше кпопочку прожми купил или нет`)
+        }
+    } else {
+        cleanHtml()
+        listHtml.insertAdjacentHTML('beforeend', `забыл написать что купить`)
     }
+
+
 }
  
-
-// document.getElementById("yearAnswer").innerHTML = "Ну и что то персионер";
